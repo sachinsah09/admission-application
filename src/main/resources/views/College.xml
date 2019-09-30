@@ -6,7 +6,6 @@
   <grid name="college-grid" title="College-Grid"
     model="com.axelor.admission.db.College">
     <field name="name" />
-    <field name="facultyEntryList" />
   </grid>
 
   <form name="college-form" title="College Form"
