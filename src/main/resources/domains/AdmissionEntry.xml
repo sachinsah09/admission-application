@@ -8,7 +8,7 @@
   <module name="admission" package="com.axelor.admission.db" />
   <entity name="AdmissionEntry" sequential="true" cachable="true">
     <many-to-one name="candidate" title="Candidate"
-      ref="com.axelor.contact.db.Contact" required="true" />
+      ref="com.axelor.contact.db.Contact" required="true" unique="true" />
     <date name="registrationDate" title="Registration Date" />
     <many-to-one name="faculty" title="Faculty"
       ref="com.axelor.admission.db.Faculty" required="true" />

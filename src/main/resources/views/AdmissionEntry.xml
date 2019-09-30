@@ -14,10 +14,10 @@
     <field name="collegeSelected" />
   </grid>
 
-  <form name="admission-entry-form" title="Admission-Entry-Form"
+  <form name="admission-entry-form" title="Admission Entry Form"
     model="com.axelor.admission.db.AdmissionEntry"
     onNew="action-admission-entry-set-registration-date"
-    onLoad="action-admission-entry-validate-collegeList">
+    onLoad="action-admission-entry-validate-collegelist">
     <panel>
       <field name="status" widget="NavSelect"
         selection="admission.entry.status.select" />
@@ -32,13 +32,13 @@
     <panel sidebar="true">
       <button-group>
         <button name="draft" title="Draft"
-          onClick="action-admission-entry-set-status-value-draft" colSpan="2"
+          onClick="action-admission-entry-set-status-value-draft,save" colSpan="2"
           showIf="status == 4" />
         <button name="cancel" title="Cancel"
-          onClick="action-admission-entry-set-status-value-cancelled"
+          onClick="action-admission-entry-set-status-value-cancelled,save"
           colSpan="2" showIf="status == 2" />
         <button name="confirm" title="Confirm"
-          onClick="action-admission-entry-set-status-value-confirmed"
+          onClick="action-admission-entry-set-status-value-confirmed,save"
           colSpan="2" showIf="status == 1 " />
       </button-group>
     </panel>
@@ -76,7 +76,7 @@
   </action-record>
 
   <action-attrs
-    name="action-admission-entry-validate-collegeList">
+    name="action-admission-entry-validate-collegelist">
     <attribute for="collegeList" name="readonly"
       expr="status != 1" />
   </action-attrs>

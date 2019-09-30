@@ -8,7 +8,7 @@
     <field name="name" />
   </grid>
 
-  <form name="faculty-form" title="Faculty-Form"
+  <form name="faculty-form" title="Faculty Form"
     model="com.axelor.admission.db.Faculty">
     <panel title="Fill all Details">
       <field name="name" />

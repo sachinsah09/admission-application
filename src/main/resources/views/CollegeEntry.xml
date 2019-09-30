@@ -9,7 +9,7 @@
     <field name="sequence" />
   </grid>
 
-  <form name="college-entry-form" title="College-Entry-Form"
+  <form name="college-entry-form" title="College Entry Form"
     model="com.axelor.admission.db.CollegeEntry">
     <panel title="Fill all Details">
       <field name="college" />

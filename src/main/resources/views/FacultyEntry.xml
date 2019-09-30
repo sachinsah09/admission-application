@@ -9,7 +9,7 @@
     <field name="seats" />
   </grid>
 
-  <form name="faculty-entry-form" title="Faculty-Entry-Form"
+  <form name="faculty-entry-form" title="Faculty Entry Form"
     model="com.axelor.admission.db.FacultyEntry">
     <panel title="Fill all Details">
       <field name="faculty" />

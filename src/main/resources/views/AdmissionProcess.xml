@@ -10,19 +10,19 @@
     <field name="toDate" />
   </grid>
 
-  <form name="admission-process-form" title="Admission-Process-Form"
+  <form name="admission-process-form" title="Admission Process Form"
     model="com.axelor.admission.db.AdmissionProcess">
     <panel title="Fill all Details">
       <field name="name" />
       <field name="fromDate" />
       <field name="toDate" />
       <button name="completeProcess" title="Complete Process"
-        onClick="action.admission.process.complete.admission.for.admission.entries" />
+        onClick="action-admission-process-complete-admission-for-admission-entries" />
     </panel>
   </form>
 
   <action-method
-    name="action.admission.process.complete.admission.for.admission.entries">
+    name="action-admission-process-complete-admission-for-admission-entries">
     <call class="com.axelor.admission.web.AdmissionProcessController"
       method="completeAdmissionOnAdmissionEntry" />
   </action-method>
