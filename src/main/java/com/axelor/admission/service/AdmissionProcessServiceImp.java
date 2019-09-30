@@ -4,7 +4,9 @@ import com.axelor.admission.db.AdmissionEntry;
 import com.axelor.admission.db.AdmissionProcess;
 import com.axelor.admission.db.CollegeEntry;
 import com.axelor.admission.db.Faculty;
+import com.axelor.admission.db.FacultyEntry;
 import com.axelor.admission.db.repo.AdmissionEntryRepository;
+import com.axelor.admission.db.repo.FacultyEntryRepository;
 import com.axelor.admission.db.repo.FacultyRepository;
 import com.axelor.inject.Beans;
 import com.google.inject.persist.Transactional;
@@ -32,8 +34,20 @@ public class AdmissionProcessServiceImp implements AdmissionProcessService {
 			for (AdmissionEntry admissionEntry : admissionEntryList) {
 				for (CollegeEntry collegeEntry : admissionEntry.getCollegeList()) {
 
-					admissionEntry.setCollegeSelected(collegeEntry.getCollege());
-					admissionEntry.setValidationDate(LocalDate.now());
+					FacultyEntry facultyEntry = Beans.get(FacultyEntryRepository.class).all()
+							.filter("self.faculty=? AND self.college= ?", faculty.getId(), collegeEntry.getCollege())
+							.fetchOne();
+					int seatVailable = facultyEntry.getSeats();
+					if (seatVailable > 0) {
+						admissionEntry.setCollegeSelected(collegeEntry.getCollege());
+						admissionEntry.setValidationDate(LocalDate.now());
+						admissionEntry.setStatus(3);
+						seatVailable--;
+						facultyEntry.setSeats(seatVailable);
+					} else {
+						admissionEntry.setStatus(4);
+					}
+
 				}
 			}
 		}
