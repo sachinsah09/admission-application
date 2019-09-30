@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+  <grid name="admission-entry-grid" title="Admission-Entry-Grid"
+    model="com.axelor.admission.db.AdmissionEntry">
+    <field name="candidate" />
+    <field name="registrationDate" />
+    <field name="faculty" />
+    <field name="merit" />
+    <field name="status" />
+    <field name="validationDate" />
+    <field name="collegeSelected" />
+  </grid>
+
+  <form name="admission-entry-form" title="Admission-Entry-Form"
+    model="com.axelor.admission.db.AdmissionEntry"
+    onNew="action-admission-entry-set-registration-date"
+    onLoad="action-admission-entry-validate-collegeList">
+    <panel>
+      <field name="status" widget="NavSelect"
+        selection="admission.entry.status.select" />
+    </panel>
+    <panel title="Fill all Details">
+      <field name="candidate" />
+      <field name="registrationDate" />
+      <field name="faculty" />
+      <field name="merit" />
+    </panel>
+    <panel-related field="collegeList" title="College Entry" />
+    <panel sidebar="true">
+      <button-group>
+        <button name="draft" title="Draft"
+          onClick="action-admission-entry-set-status-value-draft" colSpan="2"
+          showIf="status == 4" />
+        <button name="cancel" title="Cancel"
+          onClick="action-admission-entry-set-status-value-cancelled"
+          colSpan="2" showIf="status == 2" />
+        <button name="confirm" title="Confirm"
+          onClick="action-admission-entry-set-status-value-confirmed"
+          colSpan="2" showIf="status == 1 " />
+      </button-group>
+    </panel>
+    <panel sidebar="true">
+      <field name="validationDate" />
+      <field name="collegeSelected" />
+    </panel>
+  </form>
+
+  <action-record
+    name="action-admission-entry-set-status-value-draft"
+    model="com.axelor.admission.db.AdmissionEntry">
+    <field name="status" expr="1" />
+  </action-record>
+  <action-record
+    name="action-admission-entry-set-status-value-cancelled"
+    model="com.axelor.admission.db.AdmissionEntry">
+    <field name="status" expr="4" />
+  </action-record>
+  <action-record
+    name="action-admission-entry-set-status-value-confirmed"
+    model="com.axelor.admission.db.AdmissionEntry">
+    <field name="status" expr="2" />
+  </action-record>
+
+  <action-record
+    name="action-invoice-create-invoice-set-status-value-cancelled"
+    model="com.axelor.admission.db.AdmissionEntry">
+    <field name="status" expr="cancelled" />
+  </action-record>
+  <action-record
+    name="action-admission-entry-set-registration-date"
+    model="com.axelor.admission.db.AdmissionEntry">
+    <field name="registrationDate" expr="eval: __date__" />
+  </action-record>
+
+  <action-attrs
+    name="action-admission-entry-validate-collegeList">
+    <attribute for="collegeList" name="readonly"
+      expr="status != 1" />
+  </action-attrs>
+
+
+
+
+
+
+
+</object-views>
